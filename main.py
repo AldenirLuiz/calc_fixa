@@ -4,6 +4,7 @@ from mainLayout import Layout
 from modelData import DataModel
 from manage import ViewCard
 from my_card import MyCard
+from datetime import datetime
 
 
 class ConfigLayout:
@@ -11,33 +12,28 @@ class ConfigLayout:
         "<KeyRelease-Return>", "<KeyRelease-KP_Add>", "<KeyRelease-KP_Enter>"
     ]
     celulas = {
-        "cobranca":[
-            "total_cobrado",
-            "repasse_novo",
-            "comissao_venda",],
-        "mercadoria":[
-            "liquido_venda",
-            "total_vendido",
-            "devolucao",]}
-    # "valor_vendido" "comissao" "liquido_venda" "repasse" "total_da_ficha" "devolucao" "valor_pago"
+        "cobranca":["total_cobrado","repasse_novo","comissao_venda",],
+        "mercadoria":["liquido_venda","total_vendido","devolucao"]}
     view_keys = (
         "total_vendido", "comissao_venda", "liquido_venda",
         "repasse_novo", "total_da_ficha", "devolucao", "total_cobrado",)
     
     def __init__(self) -> None:
         self.window = Tk()
-
+        self.session_name = f"Session: {datetime.strftime(datetime.now(), '%d/%m/%y-%HH')}"
+        self.window.title(self.session_name)
         self.primary = Frame(self.window)
         self.secondary = Frame(self.window)
         self.primary.pack(side="left",expand=True, fill="both", padx=2, pady=2, ipadx=2, ipady=2)
         self.secondary.pack(side="left",expand=True, fill="both", padx=2, pady=2, ipadx=2, ipady=2)
+        
         # Container para visualizacao dos dados calculados
         self.dict_values = dict()
         # Container para colecao de widgets
         self.widgets = dict()
         # Container para os valores cauculados temporariamente
         self.values = tuple()
-
+        
         self.temp_calc_session = dict()
 
         # Campo de insercao de dados; Valor Pago
@@ -111,8 +107,8 @@ class MainLayout(ConfigLayout):
                     f"O valor DEVOLUCAO deve ser menor ou igual ao TOTAL DA FICHA.\n VALOR DA FICHA: {data[0]} \nDEVOLUCAO: {data[1]}")
                 raise ValueError
             
-            model_val = DataModel(data)
-            values = model_val.calculate()
+            model_val = DataModel(data, self.session_name)
+            values = tuple(model_val.calculate())
 
             values_tree = (*data[:2], values[0], data[2], values[3])
 
