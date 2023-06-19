@@ -24,10 +24,9 @@ class DataModel:
         self.valor_vendido = float(round(self.valor_ficha - self.devolucao))
         self.comissao = float(round(self.valor_vendido * 0.3))
         self.liquido_venda = float(round(self.valor_vendido - self.comissao))
-        self.repasse = float(round(self.liquido_venda - self.valor_pago))
+        self.repasse = float(round(self.liquido_venda - self.valor_pago + self.restante))
 
         if self.repasse < 0:
-            self.repasse += self.restante
             if messagebox.askyesno(
                 self.messages["msg_rep_tit"], 
                 self.messages["msg_rep_inf"].format(self.repasse)+self.messages["msg_rep_add"],

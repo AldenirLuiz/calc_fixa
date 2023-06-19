@@ -68,7 +68,7 @@ class ConfigLayout:
         self.observations = Text(self.frame_view, wrap="word", width=40, height=10, )
         self.observations.pack(side="left")
         self.view_data = Layout.create_lay(self.frame_view, self.celulas, "label", font=("arial", 8))
-        self.frame_view.pack(expand=False, fill=None, pady=2, ipady=2, anchor="ne")
+        self.frame_view.pack(expand=False, fill="x", pady=2, ipady=2, anchor="ne")
         
         self.__build__()
         self.widgets["total_da_ficha"].focus()
