@@ -1,4 +1,4 @@
-from tkinter import Tk, Frame, Button
+from tkinter import Tk, Frame, Button, messagebox
 from my_treeview import MyTable
 from mainLayout import Layout
 from modelData import DataModel
@@ -102,6 +102,12 @@ class MainLayout(ConfigLayout):
                 float(self.widgets["devolucao"].get()),
                 float(self.widgets["valor_pago"].get()),
                 float(self.widgets["restante"].get()))
+            
+            if data[0] < data[1]:
+                messagebox.showerror(
+                    "Dados Invalidos!", 
+                    f"O valor DEVOLUCAO deve ser menor ou igual ao TOTAL DA FICHA.\n VALOR DA FICHA: {data[0]} \nDEVOLUCAO: {data[1]}")
+                raise ValueError
             
             model_val = DataModel(data)
             values = model_val.calculate()
