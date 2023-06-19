@@ -5,6 +5,7 @@ class DataModel:
             "valor_vendido", "comissao", "liquido_venda",
             "repasse", "total_da_ficha", "devolucao", "valor_pago"
         )
+    messages = "O valor do REPASSE esta negativo."
     def __init__(self, values:tuple) -> None:
         self.valor_ficha = values[0]
         self.devolucao = values[1]
@@ -37,7 +38,7 @@ class MessageWindow:
         self.window = Toplevel()
         self.frm_0 = Frame(self.window)
 
-        self.message_label = Label(self.frm_0, text="O valor do REPASSE esta negativo. Confira os dados.\n Caso Haja restante na ficha insira o no campo a baixo.")
+        self.message_label = Label(self.frm_0, text=None)
         self.message_label.pack()
         self.value = StringVar(self.window)
 
