@@ -47,12 +47,14 @@ Em seguida, ele adiciona as linhas de dados na tabela e so entao o método retor
         return self.main_table
     
     def get_items(self, event):
-        print(event)
-        item = self.main_table.selection()[0]
-        values = self.main_table.item(item, 'values')
+        try:
+            item = self.main_table.selection()[0]
+            values = self.main_table.item(item, 'values')
 
-        self.command(values, reverse=True)
-        self.main_table.delete(item)
+            self.command(values, reverse=True)
+            self.main_table.delete(item)
+        except:
+            return event
 
 
 

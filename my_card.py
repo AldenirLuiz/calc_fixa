@@ -21,7 +21,7 @@ class MyCard:
         self.mainframe = Frame(_master, bd=1, relief="ridge")
         # Criando a entrada de dados e sua descricao
         self.label = Label(self.mainframe, text=_name)
-        self.entry = Entry(self.mainframe, name=self.name)
+        self.entry = Entry(self.mainframe, name=self.name, justify="left")
         self.label_desc = Label(self.mainframe, text=self.descriptions[self.name])
         
         # Adicionando eventos de tecla ao entry
@@ -39,7 +39,7 @@ class MyCard:
 
     # Funcao responsavel por posicionar o caontainer principal na janela
     def __build__(self) -> None:
-        return self.mainframe.pack(expand=True, fill="both")
+        return self.mainframe.pack(expand=True, fill="y", anchor="nw")
     # Funcao responsavel por obter o valor digitado na entry
     def __get_value__(self) -> str:
         try:
@@ -84,6 +84,6 @@ class MyCard:
             self.entry.insert(0, "0")
         else:
             self.label_desc.configure(fg="green", font=('arial', 8), wraplength=122)
-        self.label.pack(expand=False, fill="x", padx=4, pady=2)
-        self.entry.pack(expand=False, fill="x", padx=4, pady=2)
-        self.label_desc.pack(expand=False, fill="x", padx=4, pady=2)
+        self.label.pack(expand=False, fill="x", padx=4, pady=1, ipadx=1, ipady=1, anchor="nw")
+        self.entry.pack(expand=False, fill=None, padx=4, pady=4, ipadx=4, ipady=4, anchor="nw")
+        self.label_desc.pack(expand=False, fill=None, padx=4, pady=2, ipadx=4, ipady=4, anchor="nw")

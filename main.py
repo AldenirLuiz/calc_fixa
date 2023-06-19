@@ -1,4 +1,4 @@
-from tkinter import Tk, Frame, Button, messagebox
+from tkinter import Text, Tk, Frame, Button, messagebox
 from my_treeview import MyTable
 from mainLayout import Layout
 from modelData import DataModel
@@ -29,8 +29,8 @@ class ConfigLayout:
 
         self.primary = Frame(self.window)
         self.secondary = Frame(self.window)
-        self.primary.pack(side="left",expand=True, fill="both")
-        self.secondary.pack(side="left",expand=True, fill="both")
+        self.primary.pack(side="left",expand=True, fill="both", padx=2, pady=2, ipadx=2, ipady=2)
+        self.secondary.pack(side="left",expand=True, fill="both", padx=2, pady=2, ipadx=2, ipady=2)
         # Container para visualizacao dos dados calculados
         self.dict_values = dict()
         # Container para colecao de widgets
@@ -65,9 +65,11 @@ class ConfigLayout:
         self.view_tree = MyTable(self.primary, self.tree_columns_names, font=("consolas", 8), _command=self.update_values).build_view()
         
         self.frame_view = Frame(self.primary)
+        self.observations = Text(self.frame_view, wrap="word", width=40, height=10, )
+        self.observations.pack(side="left")
         self.view_data = Layout.create_lay(self.frame_view, self.celulas, "label", font=("arial", 8))
-        self.frame_view.pack()
-
+        self.frame_view.pack(expand=False, fill=None, pady=2, ipady=2, anchor="ne")
+        
         self.__build__()
         self.widgets["total_da_ficha"].focus()
         self.window.mainloop()
